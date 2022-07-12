@@ -21,4 +21,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+
+//set Language
+Route::get('locale/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'cn'])) {
+        session()->put('locale', $locale);
+    }
+    return redirect()->back();
+})->name('locale');
